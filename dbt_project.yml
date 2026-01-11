@@ -40,3 +40,11 @@ models:
     # Applies to all files under models/example/
     example:
       +materialized: table
+seeds:
+  gtm-payroll-analytics-engineering:
+    employee_bands:
+      +column_types:
+        band_id: string
+        band_label: string
+        min_employees: int64
+        max_employees: int64
