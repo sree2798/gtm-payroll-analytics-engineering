@@ -1,0 +1,12 @@
+version: 2
+sources:
+  - name: raw
+    database: project-d89a99a2-b1ba-4699-bed
+    schema: raw
+    tables:
+      - name: crm_accounts
+      - name: crm_opportunities
+      - name: billing_contracts
+      - name: billing_invoices
+      - name: product_usage_daily
+      - name: support_tickets
