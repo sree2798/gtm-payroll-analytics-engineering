@@ -1,0 +1,88 @@
+version: 2
+
+models:
+  - name: stg_crm_accounts
+    columns:
+      - name: account_id
+        tests: [not_null, unique]
+      - name: employee_count
+        tests: [not_null]
+      - name: acquisition_channel
+        tests:
+          - accepted_values:
+              values: ['inbound', 'outbound', 'partner', 'events', 'referral']
+
+  - name: stg_crm_opportunities
+    columns:
+      - name: opp_id
+        tests: [not_null, unique]
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_crm_accounts')
+              field: account_id
+      - name: stage
+        tests:
+          - accepted_values:
+              values: ['Closed Won', 'Closed Lost']
+      - name: source_channel
+        tests:
+          - accepted_values:
+              values: ['inbound', 'outbound', 'partner', 'events', 'referral']
+
+  - name: stg_billing_contracts
+    columns:
+      - name: contract_id
+        tests: [not_null, unique]
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_crm_accounts')
+              field: account_id
+      - name: product_bundle
+        tests:
+          - accepted_values:
+              values: ['Payroll Only', 'Payroll+Time', 'Payroll+Time+Benefits', 'Full HCM']
+
+  - name: stg_billing_invoices
+    columns:
+      - name: invoice_id
+        tests: [not_null, unique]
+      - name: contract_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_billing_contracts')
+              field: contract_id
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['Paid', 'Past Due']
+
+  - name: stg_product_usage_daily
+    columns:
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_crm_accounts')
+              field: account_id
+      - name: usage_date
+        tests: [not_null]
+
+  - name: stg_support_tickets
+    columns:
+      - name: ticket_id
+        tests: [not_null, unique]
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_crm_accounts')
+              field: account_id
+      - name: severity
+        tests:
+          - accepted_values:
+              values: ['Low', 'Med', 'High', 'Sev1']
