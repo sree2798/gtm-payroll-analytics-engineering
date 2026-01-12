@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: fact_opportunity_enriched
+    description: "Opportunities enriched with account segmentation + account attributes + rep name. Used for Sales/RevOps dashboarding in BI tools without needing joins."
+    columns:
+      - name: opp_id
+        description: "Primary key for opportunity."
+        tests:
+          - not_null
+          - unique
+
+      - name: account_id
+        description: "Account associated with opportunity."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_account')
+              field: account_id
+
+      - name: rep_id
+        description: "Sales rep identifier."
+        tests:
+          - relationships:
+              to: ref('dim_sales_rep')
+              field: rep_id
+
+      - name: stage
+        description: "Opportunity stage (synthetic)."
+        tests:
+          - accepted_values:
+              values: ["Closed Won", "Closed Lost"]
+
+  - name: fact_contract_enriched
+    description: "Contracts enriched with account segmentation + attributes. Used for Bundle attach + ARR uplift analytics by segment."
+    columns:
+      - name: contract_id
+        description: "Primary key for contract."
+        tests:
+          - not_null
+          - unique
+
+      - name: account_id
+        description: "Account associated with contract."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_account')
+              field: account_id
