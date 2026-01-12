@@ -1,3 +1,4 @@
+--- select required columns to build the fact
 select
   contract_id,
   account_id,
