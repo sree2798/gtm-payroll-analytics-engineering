@@ -86,3 +86,58 @@ models:
         tests:
           - accepted_values:
               values: ['Low', 'Med', 'High', 'Sev1']
+  - name: stg_marketing_campaigns
+    columns:
+      - name: campaign_id
+        tests: [not_null, unique]
+      - name: channel
+        tests:
+          - accepted_values:
+              values: ['paid_search','paid_social','webinar','content','events','partner_marketing']
+
+  - name: stg_marketing_spend_daily
+    columns:
+      - name: campaign_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_marketing_campaigns')
+              field: campaign_id
+      - name: spend_usd
+        tests: [not_null]
+
+  - name: stg_marketing_leads
+    columns:
+      - name: lead_id
+        tests: [not_null, unique]
+      - name: campaign_id
+        tests:
+          - relationships:
+              to: ref('stg_marketing_campaigns')
+              field: campaign_id
+
+  - name: stg_marketing_touches
+    columns:
+      - name: touch_id
+        tests: [not_null, unique]
+      - name: lead_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_marketing_leads')
+              field: lead_id
+      - name: touch_type
+        tests:
+          - accepted_values:
+              values: ['email','ad_click','web_visit','webinar_attended','event_booth','demo_request']
+
+  - name: stg_crm_opportunity_stage_history
+    columns:
+      - name: stage_event_id
+        tests: [not_null, unique]
+      - name: opp_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_crm_opportunities')
+              field: opp_id
