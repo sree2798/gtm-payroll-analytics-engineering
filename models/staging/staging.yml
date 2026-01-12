@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_crm__accounts
+  - name: stg_crm_accounts
     columns:
       - name: account_id
         tests: [not_null, unique]
@@ -12,7 +12,7 @@ models:
           - accepted_values:
               values: ['inbound', 'outbound', 'partner', 'events', 'referral']
 
-  - name: stg_crm__opportunities
+  - name: stg_crm_opportunities
     columns:
       - name: opp_id
         tests: [not_null, unique]
@@ -20,7 +20,7 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('stg_crm__accounts')
+              to: ref('stg_crm_accounts')
               field: account_id
       - name: stage
         tests:
@@ -39,7 +39,7 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('stg_crm__accounts')
+              to: ref('stg_crm_accounts')
               field: account_id
       - name: product_bundle
         tests:
@@ -67,7 +67,7 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('stg_crm__accounts')
+              to: ref('stg_crm_accounts')
               field: account_id
       - name: usage_date
         tests: [not_null]
@@ -80,7 +80,7 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('stg_crm__accounts')
+              to: ref('stg_crm_accounts')
               field: account_id
       - name: severity
         tests:
@@ -139,5 +139,5 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('stg_crm__opportunities')
+              to: ref('stg_crm_opportunities')
               field: opp_id
