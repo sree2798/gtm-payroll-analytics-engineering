@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: dim_account
+    columns:
+      - name: account_id
+        tests: [not_null, unique]
+      - name: employee_band_id
+        tests: [not_null]
+
+  - name: fact_opportunity
+    columns:
+      - name: opp_id
+        tests: [not_null, unique]
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_account')
+              field: account_id
+
+  - name: fact_contract
+    columns:
+      - name: contract_id
+        tests: [not_null, unique]
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_account')
+              field: account_id
+
+  - name: fact_invoice
+    columns:
+      - name: invoice_id
+        tests: [not_null, unique]
+      - name: contract_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fact_contract')
+              field: contract_id
+
+  - name: fact_product_usage_daily
+    columns:
+      - name: usage_date
+        tests: [not_null]
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_account')
+              field: account_id
+
+  - name: fact_support_ticket
+    columns:
+      - name: ticket_id
+        tests: [not_null, unique]
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_account')
+              field: account_id
