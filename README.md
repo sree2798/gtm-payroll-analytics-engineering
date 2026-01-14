@@ -89,7 +89,7 @@ This project uses three functional layers (plus dev/CI schemas) per the implemen
 - `raw`  
   Source tables (synthetic generated for demo; in real life via Fivetran/ELT connectors)
 
-- `dbt_<yourname>` (dev)  
+- `dbt_sree2798` (dev)  
   Developer builds from your personal branch
 
 - `dbt_ci` (CI)  
