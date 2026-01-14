@@ -100,21 +100,6 @@ This project uses three functional layers (plus dev/CI schemas) per the implemen
 
 ---
 
-## Project structure (repo)
-
-Typical dbt structure:
-├── models
-│ ├── staging
-│ ├── intermediate
-│ └── marts
-├── seeds
-├── macros
-├── tests
-├── dbt_project.yml
-└── README.md
-
----
-
 ## Data generation (synthetic raw)
 
 Raw layer is generated via a BigQuery SQL script (≥10,000 rows per table). The script produces:
