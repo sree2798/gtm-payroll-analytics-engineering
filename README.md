@@ -1,6 +1,6 @@
 # GTM Payroll Analytics Engineering (BigQuery + dbt + CI/CD)
 
-This project is an end-to-end **Analytics Engineering** build for a Payroll SaaS Go-To-Market (GTM) analytics layer. It transforms raw CRM, Marketing, Billing, Product Usage, and Support data into **governed, tested, production-grade marts** that answer 15 stakeholder GTM questions by client segment (employee count bands). :contentReference[oaicite:1]{index=1}
+This project is an end-to-end **Analytics Engineering** build for a Payroll SaaS Go-To-Market (GTM) analytics layer. It transforms raw CRM, Marketing, Billing, Product Usage, and Support data into **governed, tested, production-grade marts** that answer 15 stakeholder GTM questions by client segment (employee count bands)
 
 ---
 ## Architecture
